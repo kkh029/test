@@ -32,7 +32,7 @@ const M = {
 };
 const t0 = now();
 const pct = (a, p) => { if (!a.length) return NaN; const s = [...a].sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.floor(p / 100 * s.length))]; };
-const stat = a => a.length ? `n=${a.length} avg=${(a.reduce((x, y) => x + y, 0) / a.length).toFixed(1)} p50=${pct(a, 50).toFixed(1)} p95=${pct(a, 95).toFixed(1)} p99=${pct(a, 99).toFixed(1)} max=${Math.max(...a).toFixed(1)}` : 'n=0';
+const stat = a => a.length ? `n=${a.length} avg=${(a.reduce((x, y) => x + y, 0) / a.length).toFixed(1)} p50=${pct(a, 50).toFixed(1)} p95=${pct(a, 95).toFixed(1)} p99=${pct(a, 99).toFixed(1)} max=${a.reduce((x, y) => (y > x ? y : x), -Infinity).toFixed(1)}` : 'n=0';
 const bump = (o, k) => { o[k] = (o[k] || 0) + 1; };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let stopping = false;
